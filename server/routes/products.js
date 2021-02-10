@@ -34,7 +34,7 @@ router.post('/', async(req, res) => {
 });
 
 // update products -request
-router.patch('/:id', async(req, res) => {
+router.patch('/update/id/:id', async(req, res) => {
     try {
         const product = await Product.findOne({ _id: req.params.id });
 
@@ -61,7 +61,7 @@ router.patch('/:id', async(req, res) => {
 });
 
 //delete request
-router.delete('/delete/:id', async(req, res) => {
+router.delete('/delete/id/:id', async(req, res) => {
     try {
         await Product.deleteOne({ _id: req.params.id });
         res.status(204).send(); //204-no content

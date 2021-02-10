@@ -15,6 +15,12 @@ const productSchema = mongose.Schema({
         maxlength: 10,
         trim: true
     },
+    productCategory: {
+        type: String,
+        required: true,
+        trim: true,
+        lowercase: true,
+    },
     password: {
         type: String,
         required: true,

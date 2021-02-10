@@ -9,11 +9,9 @@
           <li class="list-group-item active" aria-current="true">{{product.productName}}</li>
           <li class="list-group-item " aria-current="true">{{product.productNo}}</li>
           <li class="list-group-item " aria-current="true">{{product.email}}</li>
-          <li class="list-group-item " aria-current="true">{{product.productCategory}}</li>
+          <li class="list-group-item " aria-current="true">{{product.password}}</li>
           <li class="list-group-item " aria-current="true">
-            <button type="button" class="btn btn-light" @click="getProductID(product._id)">Ürüne git</button> | 
-            <button type="button" class="btn btn-light" @click="goUpdateProduct(product._id)">Update</button> | 
-            <button type="button" class="btn btn-light" @click="deleteProduct(product._id)">Delete</button>
+            <button type="button" class="btn btn-primary" @click="getProductID(product._id)">Ürüne git</button>
           </li>
            <hr>
         </ul>
@@ -39,12 +37,6 @@
           </div>
         </div>
         <br>
-        <div class="row">
-          <div class="col-md-6">
-            <input type="text" class="form-control" placeholder="Category" v-model="productdata.productCategory">
-          </div>
-        </div>
-        <br>
         <button type="button" class="btn btn-primary" @click="createProduct()">Ürün ekle</button>
       </div>
     </div>
@@ -53,55 +45,7 @@
   
 </template>
 
-<script>
-import ProductsService from '../ProductsService';
-export default {
-  name: 'ProductListComp',
-  data(){
-    return{
-      products:[],
-      error:'',
-      productdata:{
-        productName:'',
-        productNo:'',
-        email:'',
-        password:'',
-      },
-    }
-  },
-  async created(){
-    try {
-      this.products=await ProductsService.getProducts();
-    } catch (error) {
-      this.error=error.message;
-    }
-  },
-  methods:{
-     async createProduct(){
-      await ProductsService.insertProducts(this.productdata);
-      alert('Ürün eklendi.');
-      this.products= await ProductsService.getProducts();
-    },
-    
-    async getProductID(id){
-      try {
-        this.$router.replace(`/products/${id}`);
-    } catch (error) {
-      this.error=error.message;
-    }
-    },
-    async goUpdateProduct(id){
-      this.$router.replace(`/products/update/id/${id}`);
-    },
-    async deleteProduct(id){
-      await ProductsService.deleteProduct(id);
-      alert('Ürün silindi.');
-       window.location.reload()
-    }
 
-  }
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

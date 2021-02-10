@@ -43,10 +43,15 @@ class ProductService {
 
 
     //update product
-    //static updateProduct(id) {}
+    static updateProduct(id, updata) {
+        console.log(id);
+        return axios.patch(`${url}/update/id/${id}`, updata);
+    }
 
     //delete product
-    //  static deleteProduct(id) {} 
+    static deleteProduct(id) {
+        return axios.delete(`${url}/delete/id/${id}`);
+    }
 }
 
 export default ProductService;

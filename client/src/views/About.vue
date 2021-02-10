@@ -1,17 +1,15 @@
 <template>
   <div id="showProduct">
-    <h1>This is a showproduct</h1>
-    <h3>{{productID}}</h3>
+    <h1>This is a show product</h1>
     <div class="container">
       <div class="row">
         <div class="col"></div>
         <div class="col">
           <ul class="list-group">
-          <li class="list-group-item active" aria-current="true">{{Product.productName}}</li>
-          <li class="list-group-item " aria-current="true">{{Product.productNo}}</li>
-          <li class="list-group-item " aria-current="true">{{Product.email}}</li>
-          <li class="list-group-item " aria-current="true">{{Product.password}}</li>
-          <li class="list-group-item " aria-current="true">{{Product._id}}</li>
+          <li class="list-group-item active" aria-current="true">Product name: {{Product.productName}}</li>
+          <li class="list-group-item " aria-current="true">No: {{Product.productNo}}</li>
+          <li class="list-group-item " aria-current="true">Email: {{Product.email}}</li>
+          <li class="list-group-item " aria-current="true">Id: {{Product._id}}</li>
         </ul>
         </div>
         <div class="col"></div>
