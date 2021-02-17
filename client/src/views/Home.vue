@@ -6,21 +6,18 @@
 
 <script>
 // @ is an alias to /src
-import ProductListComp from '@/components/ProductListComp.vue'
-//import urlImage from '../assets/cactus2.jpg';
+import ProductListComp from "@/components/ProductListComp.vue";
 export default {
-  name: 'Home',
-  data(){
-    return{
-     myStyle:{
-            backgroundColor:"purple" 
-            },
-             activeColor: 'lightgreen',
-    }
+  name: "Home",
+  data() {
+    return {
+      myStyle: {
+        backgroundColor: "white",
+      },
+    };
   },
   components: {
     ProductListComp,
-  }
-}
+  },
+};
 </script>
-

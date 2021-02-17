@@ -1,6 +1,8 @@
 <template>
-  <div id="productlist">
+  <div id="basketcomp">
+    <h3>this is basket comp</h3>
     <div class="container">
+      <h2>burası sepettekilerin listesi</h2>
       <div class="row">
         <div class="col">
           <div class="row">
@@ -27,30 +29,12 @@
                       Show Product
                     </button>
                     |
-                    <!--
-                    <button
-                      type="button"
-                      class="btn btn-light"
-                      @click="goUpdateProduct(product._id)"
-                    >
-                      Update
-                    </button>
-                    |
-                    <button
-                      type="button"
-                      class="btn btn-light"
-                      @click="deleteProduct(product._id)"
-                    >
-                      Delete
-                    </button>
-                    |  
-                    -->
                     <button
                       type="button"
                       class="btn btn-light"
                       @click="AddBasket(product._id)"
                     >
-                      Add to Basket
+                      Delete to Basket
                     </button>
                   </li>
                 </ul>
@@ -67,14 +51,13 @@
 <script>
 import ProductsService from "../ProductsService";
 export default {
-  name: "ProductListComp",
+  name: "Basket",
   data() {
     return {
       products: [],
       error: "",
     };
   },
-  computed: {},
   async created() {
     try {
       this.products = await ProductsService.getProducts();
@@ -82,55 +65,5 @@ export default {
       this.error = error.message;
     }
   },
-  methods: {
-    url(imageurl) {
-      return `http://localhost:3535/${imageurl}`;
-    },
-
-    async getProductID(id) {
-      try {
-        this.$router.replace(`/products/${id}`);
-      } catch (error) {
-        this.error = error.message;
-      }
-    },
-    async goUpdateProduct(id) {
-      this.$router.replace(`/products/update/id/${id}`);
-    },
-    async deleteProduct(id) {
-      await ProductsService.deleteProduct(id);
-      alert("Ürün silindi.");
-      window.location.reload();
-    },
-  },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-.card {
-  margin-top: 10%;
-  margin-bottom: 10%;
-  margin-right: 5%;
-  margin-left: 5%;
-}
-
-.card-header {
-  color: brown;
-  background-color: thistle;
-}
-</style>
