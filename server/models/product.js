@@ -43,6 +43,10 @@ const productSchema = mongose.Schema({
                 throw new Error('Email is invalid');
             }
         }
+    },
+    productImage: {
+        type: String,
+        required: false
     }
 });
 

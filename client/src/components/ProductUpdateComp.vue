@@ -25,9 +25,6 @@
           <div class="col-md-6">
             <input type="email" class="form-control" id="inputEmail4" placeholder="Email" v-model="Product.email">
           </div>
-          <div class="col-md-6">
-            <input type="password" class="form-control" id="inputPassword4" placeholder="Password" >
-          </div>
         </div>
         <br>
         <button type="button" class="btn btn-primary" @click="updateProduct(Product._id)">Update</button>
@@ -64,6 +61,7 @@ return{
     async updateProduct(id){
       await ProductsService.updateProduct(id,this.Product);
       alert('ürün güncellendi.')
+      this.$router.replace(`/`);
     }
   },
 }

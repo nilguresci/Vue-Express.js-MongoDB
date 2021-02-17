@@ -8,6 +8,7 @@
           <ul class="list-group">
           <li class="list-group-item active" aria-current="true">Product name: {{Product.productName}}</li>
           <li class="list-group-item " aria-current="true">No: {{Product.productNo}}</li>
+          <li class="list-group-item " aria-current="true">Category: {{Product.productCategory}}</li>
           <li class="list-group-item " aria-current="true">Email: {{Product.email}}</li>
           <li class="list-group-item " aria-current="true">Id: {{Product._id}}</li>
         </ul>

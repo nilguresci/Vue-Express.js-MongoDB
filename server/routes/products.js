@@ -48,9 +48,14 @@ router.patch('/update/id/:id', async(req, res) => {
             product.password = req.body.password;
         }
 
+        if (req.body.productCategory) {
+            product.productCategory = req.body.productCategory;
+        }
+
         if (req.body.email) {
             product.email = req.body.email;
         }
+
 
         await product.save();
         res.send(product); //200-ok

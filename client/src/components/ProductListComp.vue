@@ -2,51 +2,32 @@
 <div id="productlist">
   <div class="container">
     <div class="row">
-      <div class="col">
-      </div>
-      <div class="col">
-        <ul class="list-group" v-for="(product,index) in products" :key="index">
-          <li class="list-group-item active" aria-current="true">{{product.productName}}</li>
-          <li class="list-group-item " aria-current="true">{{product.productNo}}</li>
-          <li class="list-group-item " aria-current="true">{{product.email}}</li>
-          <li class="list-group-item " aria-current="true">{{product.productCategory}}</li>
-          <li class="list-group-item " aria-current="true">
-            <button type="button" class="btn btn-light" @click="getProductID(product._id)">Ürüne git</button> | 
-            <button type="button" class="btn btn-light" @click="goUpdateProduct(product._id)">Update</button> | 
-            <button type="button" class="btn btn-light" @click="deleteProduct(product._id)">Delete</button>
-          </li>
-           <hr>
-        </ul>
-        
-      </div>
-      <div class="col">
-        <h5>Ürün kayıt</h5>
+      <div class="col" >
+
         <div class="row">
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Product name" v-model="productdata.productName">
-          </div>
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Product no" v-model="productdata.productNo">
+
+          <div class="col-4"  v-for="(product,index) in products" :key="index">
+            <div class="card" style="width: 21rem">
+                <img class="card-img-top" src="'http://localhost:3535/' + {{product.productImage}}" alt="Card image">  
+              <div class="card-header">
+                  {{product.productName}}
+              </div>
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item">{{product.productNo}}</li>
+                  <li class="list-group-item">{{product.email}}</li>
+                  <li class="list-group-item">{{product.productCategory}}</li>
+                  <li class="list-group-item " aria-current="true">
+                      <button type="button" class="btn btn-light" @click="getProductID(product._id)">Ürüne git</button> | 
+                      <button type="button" class="btn btn-light" @click="goUpdateProduct(product._id)">Update</button> | 
+                      <button type="button" class="btn btn-light" @click="deleteProduct(product._id)">Delete</button>
+                  </li>
+              </ul>
+            </div>
           </div>
         </div>
-        <br>
-        <div class="row">
-          <div class="col-md-6">
-            <input type="email" class="form-control" id="inputEmail4" placeholder="Email" v-model="productdata.email">
-          </div>
-          <div class="col-md-6">
-            <input type="password" class="form-control" id="inputPassword4" placeholder="Password" v-model="productdata.password">
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-md-6">
-            <input type="text" class="form-control" placeholder="Category" v-model="productdata.productCategory">
-          </div>
-        </div>
-        <br>
-        <button type="button" class="btn btn-primary" @click="createProduct()">Ürün ekle</button>
-      </div>
+
+</div>
+      <br>
     </div>
   </div>
 </div>
@@ -61,13 +42,9 @@ export default {
     return{
       products:[],
       error:'',
-      productdata:{
-        productName:'',
-        productNo:'',
-        email:'',
-        password:'',
-      },
     }
+  },
+  computed:{
   },
   async created(){
     try {
@@ -77,11 +54,7 @@ export default {
     }
   },
   methods:{
-     async createProduct(){
-      await ProductsService.insertProducts(this.productdata);
-      alert('Ürün eklendi.');
-      this.products= await ProductsService.getProducts();
-    },
+     
     
     async getProductID(id){
       try {
@@ -119,4 +92,16 @@ li {
 a {
   color: #42b983;
 }
+.card{
+  margin-top: 25%;
+  margin-bottom: 25%;
+  margin-right: 25%;
+  margin-left: 25%;
+}
+
+.card-header{
+  color: brown;
+  background-color:thistle; 
+}
+
 </style>

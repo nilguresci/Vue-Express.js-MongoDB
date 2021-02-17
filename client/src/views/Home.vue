@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" :style="myStyle">
     <ProductListComp />
   </div>
 </template>
@@ -7,11 +7,20 @@
 <script>
 // @ is an alias to /src
 import ProductListComp from '@/components/ProductListComp.vue'
-
+//import urlImage from '../assets/cactus2.jpg';
 export default {
   name: 'Home',
+  data(){
+    return{
+     myStyle:{
+            backgroundColor:"purple" 
+            },
+             activeColor: 'lightgreen',
+    }
+  },
   components: {
     ProductListComp,
   }
 }
 </script>
+
