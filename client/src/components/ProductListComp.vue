@@ -2,6 +2,19 @@
   <div id="productlist">
     <div class="container">
       <div class="row">
+        <form class="d-flex">
+          <input
+            class="form-control me-2"
+            id="mySearchInput"
+            @keypress="mySearchFunction()"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+      <div class="row">
         <div class="col">
           <div class="row">
             <div class="col-4" v-for="(product, index) in products" :key="index">
@@ -11,11 +24,13 @@
                   :src="url(product.productImage)"
                   alt="Card image"
                 />
-                <div class="card-header">
+                <div class="card-header" id="productName">
                   {{ product.productName }}
                 </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">{{ product.productNo }}</li>
+                <ul class="list-group list-group-flush" id="myUL">
+                  <li class="list-group-item">
+                    <a href="#">{{ product.productNo }}</a>
+                  </li>
                   <li class="list-group-item">{{ product.email }}</li>
                   <li class="list-group-item">{{ product.productCategory }}</li>
                   <li class="list-group-item" aria-current="true">
@@ -27,28 +42,10 @@
                       Show Product
                     </button>
                     |
-                    <!--
                     <button
                       type="button"
                       class="btn btn-light"
-                      @click="goUpdateProduct(product._id)"
-                    >
-                      Update
-                    </button>
-                    |
-                    <button
-                      type="button"
-                      class="btn btn-light"
-                      @click="deleteProduct(product._id)"
-                    >
-                      Delete
-                    </button>
-                    |  
-                    -->
-                    <button
-                      type="button"
-                      class="btn btn-light"
-                      @click="AddBasket(product._id)"
+                      @click="AddBasket(product)"
                     >
                       Add to Basket
                     </button>
@@ -66,12 +63,14 @@
 
 <script>
 import ProductsService from "../ProductsService";
+import { mapActions } from "vuex";
 export default {
   name: "ProductListComp",
   data() {
     return {
       products: [],
       error: "",
+      basketProduct: {},
     };
   },
   computed: {},
@@ -94,13 +93,53 @@ export default {
         this.error = error.message;
       }
     },
-    async goUpdateProduct(id) {
+    /* async goUpdateProduct(id) {
       this.$router.replace(`/products/update/id/${id}`);
     },
     async deleteProduct(id) {
       await ProductsService.deleteProduct(id);
       alert("Ürün silindi.");
       window.location.reload();
+    }, */
+    ...mapActions(["addBasket"]),
+    AddBasket(product) {
+      console.log("burası addbasket butonu");
+      this.basketProduct = product;
+      this.addBasket(this.basketProduct);
+      alert("Ürün sepetinize eklendi");
+    },
+    mySearchFunction() {
+      var input = document.getElementById("mySearchInput");
+      input = input.value.toUpperCase();
+      var i, txtValue;
+      console.log("burası döngüden heemn önce");
+      let x = document.getElementById("productName");
+      console.log("product name alındı");
+      // Loop through all list items, and hide those who don't match the search query
+      for (i = 0; i < x.length; i++) {
+        console.log("burası döngünün içi");
+        txtValue = x[i].innerText || x[i].textContent;
+        if (!(txtValue.toUpperCase().indexOf(input) > -1)) {
+          x[i].style.display = "none";
+        } else {
+          x[i].style.display = "list-item";
+        }
+      }
+
+      //......................................
+      /* var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul=document.getElementById('productName');
+    for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  } */
     },
   },
 };

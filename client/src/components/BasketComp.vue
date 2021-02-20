@@ -3,16 +3,18 @@
     <h3>this is basket comp</h3>
     <div class="container">
       <h2>burası sepettekilerin listesi</h2>
+      {{ ShowBasket }}
       <div class="row">
         <div class="col">
           <div class="row">
-            <div class="col-4" v-for="(product, index) in products" :key="index">
+            <div class="col-4" v-for="(product, index) in ShowBasket" :key="index">
               <div class="card" style="width: 21rem">
-                <img
+                <!--   <img
                   class="card-img-top"
                   :src="url(product.productImage)"
                   alt="Card image"
-                />
+                /> -->
+
                 <div class="card-header">
                   {{ product.productName }}
                 </div>
@@ -21,21 +23,9 @@
                   <li class="list-group-item">{{ product.email }}</li>
                   <li class="list-group-item">{{ product.productCategory }}</li>
                   <li class="list-group-item" aria-current="true">
-                    <button
-                      type="button"
-                      class="btn btn-light"
-                      @click="getProductID(product._id)"
-                    >
-                      Show Product
-                    </button>
+                    <button type="button" class="btn btn-light">Show Product</button>
                     |
-                    <button
-                      type="button"
-                      class="btn btn-light"
-                      @click="AddBasket(product._id)"
-                    >
-                      Delete to Basket
-                    </button>
+                    <button type="button" class="btn btn-light">Delete to Basket</button>
                   </li>
                 </ul>
               </div>
@@ -49,7 +39,8 @@
 </template>
 
 <script>
-import ProductsService from "../ProductsService";
+//import ProductsService from "../ProductsService";
+import { mapGetters } from "vuex";
 export default {
   name: "Basket",
   data() {
@@ -58,12 +49,15 @@ export default {
       error: "",
     };
   },
-  async created() {
+  computed: {
+    ...mapGetters(["ShowBasket"]),
+  },
+  /*async created() {
     try {
       this.products = await ProductsService.getProducts();
     } catch (error) {
       this.error = error.message;
     }
-  },
+  }, */
 };
 </script>
