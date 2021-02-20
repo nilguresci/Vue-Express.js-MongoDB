@@ -1,15 +1,10 @@
 import { createStore } from 'vuex'
+import basketComp from '../components/BasketComp.vue'
 
 export default createStore({
     state: {
-        ProductsInBasket: {
-            productName: '',
-            productNo: '',
-            productCategory: '',
-            password: '',
-            email: '',
-            productImage: '',
-        },
+
+        ProductsInBasket: []
     },
     getters: {
         ShowBasket(state) {
@@ -25,6 +20,7 @@ export default createStore({
                 password: '',
                 email: '',
                 productImage: '',
+                productID: ''
             }
             veri.productName = product.productName;
             veri.productNo = product.productNo;
@@ -32,6 +28,14 @@ export default createStore({
             veri.password = product.password;
             veri.email = product.email;
             veri.productImage = product.productImage;
+            veri.productID = product._id;
+            Object.values(state.ProductsInBasket).forEach((bproduct) => {
+                if (bproduct.productID == product._id) {
+                    basketComp.sepetAdet++;
+                    console.log('sepetteki bir ürün tekrar eklendi')
+                }
+            });
+            state.ProductsInBasket.push(veri);
         }
     },
     actions: {

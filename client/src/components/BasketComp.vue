@@ -3,7 +3,7 @@
     <h3>this is basket comp</h3>
     <div class="container">
       <h2>burası sepettekilerin listesi</h2>
-      {{ ShowBasket }}
+      {{ sepetAdet }}
       <div class="row">
         <div class="col">
           <div class="row">
@@ -22,6 +22,7 @@
                   <li class="list-group-item">{{ product.productNo }}</li>
                   <li class="list-group-item">{{ product.email }}</li>
                   <li class="list-group-item">{{ product.productCategory }}</li>
+                  <li class="list-group-item">Adet: {{ sepetAdet }}</li>
                   <li class="list-group-item" aria-current="true">
                     <button type="button" class="btn btn-light">Show Product</button>
                     |
@@ -47,6 +48,7 @@ export default {
     return {
       products: [],
       error: "",
+      sepetAdet: 0,
     };
   },
   computed: {

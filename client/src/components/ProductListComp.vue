@@ -63,7 +63,7 @@
 
 <script>
 import ProductsService from "../ProductsService";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "ProductListComp",
   data() {
@@ -73,7 +73,9 @@ export default {
       basketProduct: {},
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters(["ShowBasket"]),
+  },
   async created() {
     try {
       this.products = await ProductsService.getProducts();
@@ -102,8 +104,10 @@ export default {
       window.location.reload();
     }, */
     ...mapActions(["addBasket"]),
+    //...mapGetters(["ShowBasket"]),
     AddBasket(product) {
       console.log("burası addbasket butonu");
+
       this.basketProduct = product;
       this.addBasket(this.basketProduct);
       alert("Ürün sepetinize eklendi");
