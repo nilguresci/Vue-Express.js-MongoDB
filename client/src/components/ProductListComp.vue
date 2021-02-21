@@ -28,27 +28,17 @@
                   {{ product.productName }}
                 </div>
                 <ul class="list-group list-group-flush" id="myUL">
-                  <li class="list-group-item">
-                    <a href="#">{{ product.productNo }}</a>
-                  </li>
+                  <li class="list-group-item">{{ product.productNo }}</li>
                   <li class="list-group-item">{{ product.email }}</li>
                   <li class="list-group-item">{{ product.productCategory }}</li>
                   <li class="list-group-item" aria-current="true">
-                    <button
-                      type="button"
-                      class="btn btn-light"
-                      @click="getProductID(product._id)"
+                    <a href="#" class="card-link" @click="getProductID(product._id)"
+                      >Show Product</a
                     >
-                      Show Product
-                    </button>
-                    |
-                    <button
-                      type="button"
-                      class="btn btn-light"
-                      @click="AddBasket(product)"
+
+                    <a href="#" class="card-link" @click="AddBasket(product)"
+                      >Add to Basket</a
                     >
-                      Add to Basket
-                    </button>
                   </li>
                 </ul>
               </div>
@@ -107,7 +97,6 @@ export default {
     //...mapGetters(["ShowBasket"]),
     AddBasket(product) {
       console.log("burası addbasket butonu");
-
       this.basketProduct = product;
       this.addBasket(this.basketProduct);
       alert("Ürün sepetinize eklendi");
@@ -163,7 +152,7 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: blue;
 }
 .card {
   margin-top: 10%;

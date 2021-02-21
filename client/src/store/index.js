@@ -1,5 +1,4 @@
 import { createStore } from 'vuex'
-import basketComp from '../components/BasketComp.vue'
 
 export default createStore({
     state: {
@@ -28,14 +27,19 @@ export default createStore({
             veri.password = product.password;
             veri.email = product.email;
             veri.productImage = product.productImage;
-            veri.productID = product._id;
+            veri._id = product._id;
+            let deger = true;
             Object.values(state.ProductsInBasket).forEach((bproduct) => {
-                if (bproduct.productID == product._id) {
-                    basketComp.sepetAdet++;
+                if (bproduct._id == product._id) {
+                    bproduct.adet++
+                        deger = false
                     console.log('sepetteki bir ürün tekrar eklendi')
                 }
             });
-            state.ProductsInBasket.push(veri);
+            if (deger) {
+                veri.adet = 1
+                state.ProductsInBasket.push(veri);
+            }
         }
     },
     actions: {

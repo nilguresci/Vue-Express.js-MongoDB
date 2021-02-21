@@ -1,6 +1,5 @@
 <template>
   <div class="basket">
-    this is basket page
     <BasketComp />
   </div>
 </template>
