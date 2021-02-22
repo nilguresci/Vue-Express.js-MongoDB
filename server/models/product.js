@@ -21,6 +21,16 @@ const productSchema = mongose.Schema({
         trim: true,
         lowercase: true,
     },
+    brandName: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    sellerName: {
+        type: String,
+        required: true,
+        trim: true
+    },
     password: {
         type: String,
         required: true,
@@ -46,7 +56,13 @@ const productSchema = mongose.Schema({
     },
     productImage: {
         type: String,
-        required: false
+        required: false,
+        trim: true
+    },
+    price: {
+        type: Number,
+        required: false,
+        trim: true
     }
 });
 

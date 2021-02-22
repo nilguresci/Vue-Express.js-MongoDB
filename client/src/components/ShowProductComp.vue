@@ -9,12 +9,12 @@
             <div class="card-header">{{ Product.productName }}</div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item" aria-current="true">
-                Category: {{ Product.productCategory }}
+                {{ Product.productCategory }}
               </li>
               <li class="list-group-item" aria-current="true">
-                Email: {{ Product.email }}
+                {{ Product.email }}
               </li>
-              <li class="list-group-item" aria-current="true">Id: {{ Product._id }}</li>
+              <li class="list-group-item">{{ Product._id }}</li>
               <li class="list-group-item" aria-current="true">
                 {{ Product.productNo }} tl
               </li>
@@ -63,13 +63,15 @@ export default {
 .card {
   margin-top: 10%;
   margin-bottom: 78%;
+  text-align: left;
   /*
   margin-right: 25%;
   margin-left: 25%; */
 }
 
 .card-header {
-  color: brown;
-  background-color: thistle;
+  background-color: white;
+  text-align: left;
+  text-transform: capitalize;
 }
 </style>

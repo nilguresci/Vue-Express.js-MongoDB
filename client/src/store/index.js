@@ -28,6 +28,7 @@ export default createStore({
             veri.email = product.email;
             veri.productImage = product.productImage;
             veri._id = product._id;
+            veri.price = product.price.toFixed(2);
             let deger = true;
             Object.values(state.ProductsInBasket).forEach((bproduct) => {
                 if (bproduct._id == product._id) {
@@ -40,12 +41,23 @@ export default createStore({
                 veri.adet = 1
                 state.ProductsInBasket.push(veri);
             }
+        },
+        BasketNumberUpdate(state, idNumber) {
+            Object.values(state.ProductsInBasket).forEach((bproduct) => {
+                if (bproduct._id == idNumber._id) {
+                    bproduct.adet = bproduct + parseInt(idNumber.adet)
+                    console.log('sepetteki ürün adedi güncellendi')
+                }
+            });
         }
     },
     actions: {
         addBasket({ commit }, product) {
             commit('AddBasket', product)
         },
+        basketNumberUpd({ commit }, idNumber) {
+            commit('BasketNumberUpdate', idNumber);
+        }
     },
     modules: {}
 })

@@ -18,7 +18,7 @@
         <div class="col">
           <div class="row">
             <div class="col-4" v-for="(product, index) in products" :key="index">
-              <div class="card" style="width: 21rem">
+              <div class="card" style="width: 18rem">
                 <img
                   class="card-img-top"
                   :src="url(product.productImage)"
@@ -30,7 +30,10 @@
                 <ul class="list-group list-group-flush" id="myUL">
                   <li class="list-group-item">{{ product.productNo }}</li>
                   <li class="list-group-item">{{ product.email }}</li>
-                  <li class="list-group-item">{{ product.productCategory }}</li>
+                  <li class="list-group-item" id="category">
+                    {{ product.productCategory }}
+                  </li>
+                  <li class="list-group-item">{{ priceFix(product.price) }} TL</li>
                   <li class="list-group-item" aria-current="true">
                     <a href="#" class="card-link" @click="getProductID(product._id)"
                       >Show Product</a
@@ -53,7 +56,7 @@
 
 <script>
 import ProductsService from "../ProductsService";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
   name: "ProductListComp",
   data() {
@@ -61,11 +64,10 @@ export default {
       products: [],
       error: "",
       basketProduct: {},
+      price: {},
     };
   },
-  computed: {
-    ...mapGetters(["ShowBasket"]),
-  },
+  computed: {},
   async created() {
     try {
       this.products = await ProductsService.getProducts();
@@ -76,6 +78,9 @@ export default {
   methods: {
     url(imageurl) {
       return `http://localhost:3535/${imageurl}`;
+    },
+    priceFix(priceF) {
+      return parseFloat(priceF).toFixed(2);
     },
 
     async getProductID(id) {
@@ -150,9 +155,10 @@ ul {
 li {
   display: inline-block;
   margin: 0 10px;
+  text-align: left;
 }
 a {
-  color: blue;
+  color: black;
 }
 .card {
   margin-top: 10%;
@@ -160,9 +166,12 @@ a {
   margin-right: 5%;
   margin-left: 5%;
 }
-
+#category {
+  text-transform: capitalize;
+}
 .card-header {
-  color: brown;
-  background-color: thistle;
+  background-color: white;
+  text-align: left;
+  text-transform: capitalize;
 }
 </style>

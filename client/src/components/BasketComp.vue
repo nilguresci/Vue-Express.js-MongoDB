@@ -18,7 +18,11 @@
                     }}</a>
                   </li>
                   <li class="list-group-item">
-                    <button type="button" class="btn btn-light">
+                    <button
+                      type="button"
+                      class="btn btn-light"
+                      @click="MinusFunc(product._id)"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -34,7 +38,11 @@
                     </button>
                     |
                     {{ product.adet }} |
-                    <button type="button" class="btn btn-light">
+                    <button
+                      type="button"
+                      class="btn btn-light"
+                      @click="AddFunc(product._id)"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -46,13 +54,9 @@
                         <path
                           d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
                         />
-                      </svg>
-                    </button>
-                  </li>
-                  <li class="list-group-item">Price: 20 TL</li>
-
-                  <li class="list-group-item" aria-current="true">
-                    <button type="button" class="btn btn-light">
+                      </svg></button
+                    >||
+                    <button type="button" class="btn btn-light" id="deleteBasket">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -69,9 +73,10 @@
                           d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
                         />
                       </svg>
-                      Delete to Basket
+                      Delete
                     </button>
                   </li>
+                  <li class="list-group-item">Price: {{ product.price }} TL</li>
                 </ul>
               </div>
             </div>
@@ -85,7 +90,7 @@
 
 <script>
 //import ProductsService from "../ProductsService";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Basket",
   data() {
@@ -113,6 +118,14 @@ export default {
         this.error = error.message;
       }
     },
+    ...mapActions(["basketNumberUpd"]),
+    async MinusFunc(id) {
+      let idNumber = {};
+      idNumber._id = id;
+      idNumber.adet = -1;
+      this.basketNumberUpd(idNumber);
+      console.log("Minus func tamalandı");
+    },
   },
 };
 </script>
@@ -131,5 +144,13 @@ export default {
 }
 ul {
   color: darksalmon;
+}
+li {
+  background-color: white;
+  text-align: left;
+  text-transform: capitalize;
+}
+#deleteBasket {
+  text-align: right;
 }
 </style>
